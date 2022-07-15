@@ -27,7 +27,7 @@ class UserService {
         try {
             await transport.sendMail({
                 from: user,
-                to: user,
+                to: "orlando.maia1@gmail.com",
                 subject: 'G&T Controller - Trabalhe Conosco',
                 text: 'Curriculo referente a vaga front-end!',
                 attachments: [
