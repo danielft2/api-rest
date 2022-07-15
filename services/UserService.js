@@ -10,7 +10,7 @@ class UserService {
         try {
             await transport.sendMail({
                 from: user,
-                to: "orlando.maia1@gmail.com",
+                to: "contato@gtcontroller.com.br",
                 replyTo: `${email}`,
                 subject: `${nome} - Formulário de Contato`,
                 text: `${mensagem}`,
@@ -23,10 +23,11 @@ class UserService {
     }
 
     static async sendCurriculo(req, res) {
+
         try {
             await transport.sendMail({
                 from: user,
-                to: "orlando.maia1@gmail.com",
+                to: user,
                 subject: 'G&T Controller - Trabalhe Conosco',
                 text: 'Curriculo referente a vaga front-end!',
                 attachments: [
