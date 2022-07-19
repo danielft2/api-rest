@@ -6,13 +6,14 @@ const user = process.env.EMAIL_USER;
 
 class UserService {
     static async sendEmail(req, res) {
-        const { nome, email, mensagem } = req.body;
+        const { assunto, nome, email, mensagem } = req.body;
+        
         try {
             await transport.sendMail({
                 from: user,
-                to: "contato@gtcontroller.com.br",
+                to: user,
                 replyTo: `${email}`,
-                subject: `${nome} - Formulário de Contato`,
+                subject: `${nome} - ${assunto}`,
                 text: `${mensagem}`,
             })         
             res.status(200).json({ sucess: true });
@@ -23,13 +24,14 @@ class UserService {
     }
 
     static async sendCurriculo(req, res) {
-
+        const { email, telefone, cargo } = req.body;
         try {
             await transport.sendMail({
                 from: user,
-                to: "orlando.maia1@gmail.com",
+                to: user,
+                replyTo: `${email}`,
                 subject: 'G&T Controller - Trabalhe Conosco',
-                text: 'Curriculo referente a vaga front-end!',
+                text: `Curriculo referente ao cargo pretendido de ${cargo}, telefone de contato: ${telefone}`,
                 attachments: [
                     { filename: "curriculo.pdf", path: path.resolve(__dirname, '..', 'tmp', 'uploads', `${req.file.filename}`)}
                 ]

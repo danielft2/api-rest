@@ -9,7 +9,6 @@ routes.post('/send', async (req, res) => {
 })
 
 routes.post('/sendCurriculo', multer(multerConfig).single('file'), async (req, res) => {
-    console.log(req.body.nome);
     return await UserService.sendCurriculo(req, res);  
 })
 
