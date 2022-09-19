@@ -3,6 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 const user = process.env.EMAIL_USER;
+const contact = process.env.EMAIL_CONTACT;
 
 class UserService {
     static async sendEmail(req, res) {
@@ -11,7 +12,7 @@ class UserService {
         try {
             await transport.sendMail({
                 from: user,
-                to: user,
+                to: contact,
                 replyTo: `${email}`,
                 subject: `${nome} - ${assunto}`,
                 text: `${mensagem}`,
@@ -19,7 +20,7 @@ class UserService {
             res.status(200).json({ sucess: true });
         } 
         catch(error) {
-            res.json({ msg: error.code });
+            res.status(500).json({ msg: error.code });
         }
     }
 
@@ -28,7 +29,7 @@ class UserService {
         try {
             await transport.sendMail({
                 from: user,
-                to: user,
+                to: contact,
                 replyTo: `${email}`,
                 subject: 'G&T Controller - Trabalhe Conosco',
                 text: `Curriculo referente ao cargo pretendido de ${cargo}, telefone de contato: ${telefone}`,
@@ -40,7 +41,7 @@ class UserService {
             fs.unlinkSync(req.file.path);
             res.status(200).json({ sucess: true });
         } catch(error) {
-            res.json({ msg: error.code });
+            res.status(500).json({ msg: error.code });
         }  
     }
 }
