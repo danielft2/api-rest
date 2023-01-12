@@ -14,4 +14,4 @@ app.use(morgan('dev'));
 
 
 app.use(require('./routers/routes'));
-app.listen(3000);
+app.listen(process.env.PORT);
